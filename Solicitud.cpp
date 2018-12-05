@@ -8,6 +8,8 @@ Solicitud::Solicitud(){
 }
 
 char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *arguments,  int ident){
+
+	cout<< arguments << endl;
     //Preparamos envio
 	struct mensaje *msj = (struct mensaje *) malloc(sizeof(mensaje));
 	msj->messageType = 0;

@@ -81,6 +81,11 @@ string funcion2(string texto, int n){
 
 	string output = "";
  	string palindromo = "";
+
+ 	ofstream myfile;
+    myfile.open ("text.txt");
+    myfile << texto << "\0";
+    myfile.close();
  	
 	vector<string> v;
 
@@ -106,6 +111,7 @@ string funcion2(string texto, int n){
 			output = ReplaceAll(string(output), std::string("Ó"), std::string("O"));
 			output = ReplaceAll(string(output), std::string("ú"), std::string("U"));
 			output = ReplaceAll(string(output), std::string("Ú"), std::string("U"));
+			
 			v.push_back(output);
  		}
 	}
