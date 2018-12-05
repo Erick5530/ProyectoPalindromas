@@ -82,6 +82,11 @@ string funcion2(string texto, int n){
 	string output = "";
  	string palindromo = "";
  	
+    ofstream myfile;
+    myfile.open ("text.txt");
+    myfile << texto << "\0";
+    myfile.close();
+
 	vector<string> v;
 
  	ifstream myReadFile;
@@ -96,6 +101,10 @@ string funcion2(string texto, int n){
     		std::transform(output.begin(), output.end(),output.begin(), ::toupper);
 			output = ReplaceAll(string(output), std::string(","), std::string(""));
 			output = ReplaceAll(string(output), std::string("."), std::string(""));
+            output = ReplaceAll(string(output), std::string("-"), std::string(""));
+            output = ReplaceAll(string(output), std::string("¿"), std::string(""));
+            output = ReplaceAll(string(output), std::string("?"), std::string(""));
+
 			output = ReplaceAll(string(output), std::string("á"), std::string("A"));
 			output = ReplaceAll(string(output), std::string("Á"), std::string("A"));
 			output = ReplaceAll(string(output), std::string("é"), std::string("E"));
@@ -119,27 +128,41 @@ string funcion2(string texto, int n){
 			palindromo += v[j];
 	
 			if(aux == n){
-				//cout << "Palindromo:" << palindromo << endl;
+				cout << "Palindromo:" << palindromo << endl;
 				string invertida(palindromo.rbegin(),palindromo.rend());
 				if(palindromo == invertida){
 					cout << "[" << palindromo << "] == [" << invertida << "]" << endl;
 					contador++;
 					strReturn += palindromo + "~";
 				}else{
-					//cout << "---> [" << palindromo << "] <> [" << invertida << "]" << endl;
+					cout << "---> [" << palindromo << "] <> [" << invertida << "]" << endl;
 				}
 				aux = 0;
 				palindromo = "";
 				i = j;
 			}
 		}
-		//cout << "------------------------" << endl;
+		cout << "------------------------" << endl;
 	}
 
 	cout << "\nNumero palindromos: " << contador << endl;
 
+    if(contador == 0)
+        strReturn = "Sin resultados 123~\n";
+
 	return strReturn;
 
+}
+
+void tokenize(std::string const &str, const char delim, std::vector<std::string> &out) {
+    size_t start;
+    size_t end = 0;
+
+    while ((start = str.find_first_not_of(delim, end)) != std::string::npos)
+    {
+        end = str.find(delim, start);
+        out.push_back(str.substr(start, end - start));
+    }
 }
 
 int main(int argc, char*argv[]) {
@@ -150,6 +173,7 @@ int main(int argc, char*argv[]) {
     int num_paquetes = 0;
 
     printf("%s\n", "Servidor conectado...");
+    
     while(true) {
 
         cout<<"\t->Esperando peticion..."<<endl;
@@ -160,7 +184,19 @@ int main(int argc, char*argv[]) {
 
         int nu = 5; //funcion2(cadenaRecibida,4);
 
-        string res = funcion2(cadenaRecibida,4);
+         //std::string s = "dfgdfgfmgn kfbg bfbg fkg b~5";
+        const char delim = '~';
+
+        std::vector<std::string> out;
+        tokenize(cadenaRecibida, delim, out);
+
+        /*for (auto &s: out) {
+            std::cout << s << '\n';
+        }
+        cout << "Numero: " << out[1];
+        int n = std::stoi(out[1]);*/
+
+        string res = funcion2(out[0],std::stoi(out[1]));
 
         //cout<<"contador = " << nu << endl;
         string resu = "Palabras palindromas identificadas : " + std::to_string( nu );
@@ -171,7 +207,10 @@ int main(int argc, char*argv[]) {
         cout<<"\t\t->Recibido: "<<cadenaRecibida<<endl;
         num_paquetes = msg->operationId;
        // respuesta.sendReply((char *) resu.c_str() , msg->IP, msg->puerto);
-         respuesta.sendReply((char *) res.c_str() , msg->IP, msg->puerto);
+
+        cout << "Str a regresar: " << res.c_str() << endl;
+
+         respuesta.sendReply((char *) res.c_str(), msg->IP, msg->puerto);
         fflush(stdin);
 
     }
