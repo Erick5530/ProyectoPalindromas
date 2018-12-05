@@ -64,7 +64,7 @@ void fnchilo1(string ip,int puerto,int operacion,char* consultas,int id){
 		printf("Si entro\n");
 
 	}*/
-	//cout<< resp1 <<endl;
+	//cout<< resp1[0] <<endl;
 }
 
 void fnchilo2(string ip,int puerto,int operacion,char* consultas,int id){
