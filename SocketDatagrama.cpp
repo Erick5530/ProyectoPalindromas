@@ -1,5 +1,10 @@
 #include "SocketDatagrama.h"
+#include <string>       // std::string
+#include <iostream>     // std::cout
+#include <sstream>      // std::stringstream, std::stringbuf
 
+
+using namespace std;
 SocketDatagrama::SocketDatagrama(int puerto){
 	s = socket(AF_INET, SOCK_DGRAM, 0);
 	/* rellena la dirección del servidor */
@@ -18,6 +23,7 @@ SocketDatagrama::~SocketDatagrama(){
 int SocketDatagrama::envia(PaqueteDatagrama &p) {
 	int enviados = 0;
     bzero((char *)&direccionForanea, sizeof(direccionForanea));
+    
     direccionForanea.sin_family = AF_INET;
     direccionForanea.sin_addr.s_addr = inet_addr(p.obtieneDireccion());
     direccionForanea.sin_port = htons(p.obtienePuerto());

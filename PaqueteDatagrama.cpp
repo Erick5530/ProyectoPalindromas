@@ -1,4 +1,6 @@
 #include "PaqueteDatagrama.h"
+#include <string>
+#include <cstring>
 
 PaqueteDatagrama::PaqueteDatagrama(char *cadena, unsigned int longitudDatagrama, char *direccionIP, int puertoPD){
 	datos = new char[longitudDatagrama];
@@ -28,7 +30,12 @@ void PaqueteDatagrama::inicializaIp(char *direccionIP){
 }
 
 void PaqueteDatagrama::inicializaDatos(char *cadena){
+
+	//string dat(cadena);
+	//datos = (char*)dat.c_str();
     memcpy(datos, cadena, longitud);
+
+
 }
 
 //Obtenemos datos

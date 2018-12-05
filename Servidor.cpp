@@ -77,80 +77,80 @@ int funcion(string texto, int n){
 
 string funcion2(string texto, int n){
 
-	string strReturn = "";
+    string strReturn = "";
 
-	string output = "";
- 	string palindromo = "";
- 	
+    string output = "";
+    string palindromo = "";
+    
     ofstream myfile;
     myfile.open ("text.txt");
     myfile << texto << "\0";
     myfile.close();
 
-	vector<string> v;
+    vector<string> v;
 
- 	ifstream myReadFile;
-  	myReadFile.open("text.txt");
- 	if (myReadFile.is_open()) {
+    ifstream myReadFile;
+    myReadFile.open("text.txt");
+    if (myReadFile.is_open()) {
 
- 		aux = 0;
-		contador = 0;
+        aux = 0;
+        contador = 0;
 
- 		while (!myReadFile.eof()) {
-    		myReadFile >> output;
-    		std::transform(output.begin(), output.end(),output.begin(), ::toupper);
-			output = ReplaceAll(string(output), std::string(","), std::string(""));
-			output = ReplaceAll(string(output), std::string("."), std::string(""));
+        while (!myReadFile.eof()) {
+            myReadFile >> output;
+            std::transform(output.begin(), output.end(),output.begin(), ::toupper);
+            output = ReplaceAll(string(output), std::string(","), std::string(""));
+            output = ReplaceAll(string(output), std::string("."), std::string(""));
             output = ReplaceAll(string(output), std::string("-"), std::string(""));
             output = ReplaceAll(string(output), std::string("¿"), std::string(""));
             output = ReplaceAll(string(output), std::string("?"), std::string(""));
 
-			output = ReplaceAll(string(output), std::string("á"), std::string("A"));
-			output = ReplaceAll(string(output), std::string("Á"), std::string("A"));
-			output = ReplaceAll(string(output), std::string("é"), std::string("E"));
-			output = ReplaceAll(string(output), std::string("É"), std::string("E"));
-			output = ReplaceAll(string(output), std::string("í"), std::string("I"));
-			output = ReplaceAll(string(output), std::string("Í"), std::string("I"));
-			output = ReplaceAll(string(output), std::string("ó"), std::string("O"));
-			output = ReplaceAll(string(output), std::string("Ó"), std::string("O"));
-			output = ReplaceAll(string(output), std::string("ú"), std::string("U"));
-			output = ReplaceAll(string(output), std::string("Ú"), std::string("U"));
-			v.push_back(output);
- 		}
-	}
+            output = ReplaceAll(string(output), std::string("á"), std::string("A"));
+            output = ReplaceAll(string(output), std::string("Á"), std::string("A"));
+            output = ReplaceAll(string(output), std::string("é"), std::string("E"));
+            output = ReplaceAll(string(output), std::string("É"), std::string("E"));
+            output = ReplaceAll(string(output), std::string("í"), std::string("I"));
+            output = ReplaceAll(string(output), std::string("Í"), std::string("I"));
+            output = ReplaceAll(string(output), std::string("ó"), std::string("O"));
+            output = ReplaceAll(string(output), std::string("Ó"), std::string("O"));
+            output = ReplaceAll(string(output), std::string("ú"), std::string("U"));
+            output = ReplaceAll(string(output), std::string("Ú"), std::string("U"));
+            v.push_back(output);
+        }
+    }
 
-	myReadFile.close();
-	
-	for(int i=0; i<v.size(); i++){
-		for(int j=i; j<v.size(); j++){
-			//cout << "Palabra: " << palabra.v[j] << endl;
-			aux++;
-			palindromo += v[j];
-	
-			if(aux == n){
-				cout << "Palindromo:" << palindromo << endl;
-				string invertida(palindromo.rbegin(),palindromo.rend());
-				if(palindromo == invertida){
-					cout << "[" << palindromo << "] == [" << invertida << "]" << endl;
-					contador++;
-					strReturn += palindromo + "~";
-				}else{
-					cout << "---> [" << palindromo << "] <> [" << invertida << "]" << endl;
-				}
-				aux = 0;
-				palindromo = "";
-				i = j;
-			}
-		}
-		cout << "------------------------" << endl;
-	}
+    myReadFile.close();
+    
+    for(int i=0; i<v.size(); i++){
+        for(int j=i; j<v.size(); j++){
+            //cout << "Palabra: " << palabra.v[j] << endl;
+            aux++;
+            palindromo += v[j];
+    
+            if(aux == n){
+                cout << "Palindromo:" << palindromo << endl;
+                string invertida(palindromo.rbegin(),palindromo.rend());
+                if(palindromo == invertida){
+                    cout << "[" << palindromo << "] == [" << invertida << "]" << endl;
+                    contador++;
+                    strReturn += palindromo + "~";
+                }else{
+                    cout << "---> [" << palindromo << "] <> [" << invertida << "]" << endl;
+                }
+                aux = 0;
+                palindromo = "";
+                i = j;
+            }
+        }
+        cout << "------------------------" << endl;
+    }
 
-	cout << "\nNumero palindromos: " << contador << endl;
+    cout << "\nNumero palindromos: " << contador << endl;
 
     if(contador == 0)
         strReturn = "Sin resultados 123~\n";
 
-	return strReturn;
+    return strReturn;
 
 }
 
