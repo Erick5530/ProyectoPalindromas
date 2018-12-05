@@ -28,7 +28,7 @@ int SocketDatagrama::envia(PaqueteDatagrama &p) {
     direccionForanea.sin_addr.s_addr = inet_addr(p.obtieneDireccion());
     direccionForanea.sin_port = htons(p.obtienePuerto());
     enviados = sendto(s, p.obtieneDatos(), p.obtieneLongitud(), 0, (struct sockaddr *)&direccionForanea, sizeof(direccionForanea)); 
- cout << "resultado envia : " << enviados << endl;
+ 
     return enviados;
 }
 

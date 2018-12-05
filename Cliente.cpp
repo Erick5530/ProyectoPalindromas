@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
 	string mensageOriginal = buffer.str();
 
 
-//	cout << mensageOriginal << endl;
+	cout << mensageOriginal << endl;
 
 
 	mensageOriginal = ReplaceAll(string(mensageOriginal), std::string("~"), std::string(""));
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
 	string consultas2 = mensageOriginal.substr (longitudCadena,mensageOriginal.length()) + "~" + std::to_string( n );	
 
 
-	cout << "aqui 1 " << endl;
+//	cout << "aqui 1 " << endl;
 	//string consultas3 = mensageOriginal.substr (2*longitudCadena,mensageOriginal.length());	
 
 	//cout << "Parte 1 : " << consultas << endl;
@@ -130,12 +130,12 @@ int main(int argc, char *argv[]) {
 	int dbo = 0;
 
 	thread th1(fnchilo1,ipManuel,puerto,operacion,(char*)consultas.c_str(),-11);
-	thread th2(fnchilo2,iplocal,puerto,operacion,(char*)consultas2.c_str(),-11);
+	//thread th2(fnchilo2,iplocal,puerto,operacion,(char*)consultas2.c_str(),-11);
 	//thread th3(fnchilo3,iplocal,puerto,operacion,(char*)consultas3.c_str(),-11);
 
-cout << "aqui 2 " << endl;
+//cout << "aqui 2 " << endl;
 	th1.join();
-	th2.join();
+	//th2.join();
 	//th3.join();
     return 0;
 }

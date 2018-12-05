@@ -9,7 +9,7 @@ Solicitud::Solicitud(){
 
 char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *arguments,  int ident){
 
-	cout<< arguments << endl;
+	//cout<< arguments << endl;
     //Preparamos envio
 	struct mensaje *msj = (struct mensaje *) malloc(sizeof(mensaje));
 	msj->messageType = 0;
@@ -34,7 +34,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
 		///cout<<"\t->Esperando respuesta..."<<endl;
 		n = socketlocal->recibeTimeout(respuesta, 5, 100);	
 
-		//cout << "respuetsa recibida : " << respuesta.obtieneDatos() << endl;	
+		cout << "respuetsa recibida : " << respuesta.obtieneDatos() << endl;	
 		if(n > 0){
 			break;
 		}
